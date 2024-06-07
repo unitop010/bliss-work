@@ -1,0 +1,2 @@
+python myfixguide.py
+pause
