@@ -1,0 +1,2 @@
+python arose.py
+pause
