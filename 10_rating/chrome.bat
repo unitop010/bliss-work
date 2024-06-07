@@ -1,0 +1,1 @@
+chrome.exe -remote-debugging-port=9000 --user-data-dir="E:\Scraping\usa_rahul\work\10_rating\chrome"

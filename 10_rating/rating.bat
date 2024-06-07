@@ -1,0 +1,2 @@
+python rating.py
+pause
