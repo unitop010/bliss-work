@@ -1,0 +1,2 @@
+python acer.py
+pause
