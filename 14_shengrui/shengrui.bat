@@ -1,0 +1,2 @@
+python shengrui.py
+pause
