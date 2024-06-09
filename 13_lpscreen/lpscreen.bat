@@ -1,0 +1,2 @@
+python lpscreen.py
+pause
