@@ -1,0 +1,1 @@
+chrome.exe -remote-debugging-port=9203 --user-data-dir="C:\chrome\9203"
