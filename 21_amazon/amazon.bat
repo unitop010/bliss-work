@@ -1,0 +1,2 @@
+py amazon.py
+pause
