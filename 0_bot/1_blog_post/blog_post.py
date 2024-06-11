@@ -14,19 +14,12 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support import ui
 from time import sleep
+from datetime import datetime
 import json, csv, random, os, sys
 
 service = Service(executable_path="C:\chromedriver-win64\chromedriver.exe")   
 chrome_options = Options()
 chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9050")
-chrome_options.add_argument("--headless")  # Ensure GUI is off
-chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
-chrome_options.add_argument("--disable-gpu")  # applicable to windows os only
-chrome_options.add_argument("start-maximized")  # open Browser in maximized mode
-chrome_options.add_argument("disable-infobars")  # disabling infobars
-chrome_options.add_argument("--disable-extensions")  # disabling extensions
-chrome_options.add_argument("--disable-dev-shm-usage")  # overcome limited resource problems
-chrome_options.add_argument('--log-level=3')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
 # sleep(random.uniform(1.0, 2.0))
@@ -38,9 +31,16 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 with open('urls.csv', 'r+', encoding='utf-8') as urls:
   all_urls = urls.readlines()
 
+output_directory = f'{datetime.now().strftime("%m_%d_%Y")}-{len(all_urls)}'
+
+if not os.path.exists(output_directory):
+  os.makedirs(output_directory)
+
 for url_index, url in enumerate(all_urls):
   driver.get(url)
+  sleep(random.uniform(3.0, 5.0))
   html_content = driver.page_source
-  with open("output.html", "w", encoding="utf-8") as file:
+  with open(f'{output_directory}/{url_index + 1}.html', "w", encoding="utf-8") as file:
     file.write(html_content)
-print('*' * 20 + 'finish' + '*' * 20)
+  print(f'{url_index + 1}.html saved')
+print('-' * 3 + 'finish' + '-' * 3)
