@@ -16,7 +16,6 @@ from selenium.webdriver.support import ui
 from time import sleep
 from threading import Thread
 from openpyxl import Workbook
-import undetected_chromedriver as uc
 import json, csv, random, os, sys
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -28,26 +27,30 @@ for state in states:
   while True:
     base_url = f'https://www.lg.com/us/support/warranty-information#subcat=lap&cat=computers&page={page_id}&sort=0&side=b2c&ct=CT00000317&sp=&state='
     driver.get(base_url + state)
-    try:
+    sleep(1)
+
+    product_items = driver.find_elements(By.CLASS_NAME, 'box-result-item')
+
+    if product_items:
       print(f'--- {page_id} page ---')
-      product_items = driver.find_elements(By.CLASS_NAME, 'box-result-item')
-    except:
+    else:
+      print('else')
       break
     for product_item in product_items:
       # name
       try:
-        product_name = product_item.find_element(By.CLASS_NAME, 'name')
+        product_name = product_item.find_element(By.CLASS_NAME, 'name').text
       except:
         product_name = ''
       # model number
       try:
-        product_model = product_item.find_element(By.CLASS_NAME, 'model-number')
+        product_model = product_item.find_element(By.CLASS_NAME, 'model-number').text
       except:
         product_model = ''
       
       output = [product_name, product_model]
       
-      open_out = open('output_LG.csv','a',newline="", encoding='utf-8')
+      open_out = open('output_LG.csv','a',newline="", encoding='utf-8-sig')
       file_o_csv = csv.writer(open_out, delimiter=',')
       file_o_csv.writerow(output)
       open_out.close()
