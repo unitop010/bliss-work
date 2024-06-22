@@ -16,9 +16,17 @@ from selenium.webdriver.support import ui
 from time import sleep
 from threading import Thread
 from openpyxl import Workbook
+import pandas as pd
 import json, csv, random, os, sys
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+def remove_duplications():
+  # Remove duplicated rows
+  df = pd.read_csv(f'output_LG.csv')
+  os.remove('output_LG.csv')
+  df_unique = df.drop_duplicates()
+  df_unique.to_csv('output_LG.csv', index=False, encoding='utf-8-sig')
 
 states = ['ACTIVE', 'DISCONTINUED']
 for state in states:
