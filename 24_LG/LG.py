@@ -12,7 +12,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support import ui
 from time import sleep
 import pandas as pd
 import csv, os
