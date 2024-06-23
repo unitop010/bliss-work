@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from time import sleep
 import pandas as pd
 import csv, os
