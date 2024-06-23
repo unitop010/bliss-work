@@ -16,7 +16,7 @@ from selenium.webdriver.support import ui
 from time import sleep
 from threading import Thread
 import pandas as pd
-import json, csv, random, os, sys
+import json, csv, os, sys
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
