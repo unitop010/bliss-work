@@ -14,7 +14,7 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support import ui
 from time import sleep
-import csv, random, os, sys
+import random, os, sys
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
