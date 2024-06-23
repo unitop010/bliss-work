@@ -15,7 +15,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support import ui
 from time import sleep
 from threading import Thread
-from openpyxl import Workbook
 import pandas as pd
 import json, csv, random, os, sys
 
