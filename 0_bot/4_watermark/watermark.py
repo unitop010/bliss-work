@@ -56,4 +56,9 @@ def add_moving_watermark(video_path, watermark_path, output_path):
     
 
 # Example usage
-add_moving_watermark('input_video.mp4', 'watermark.png', 'output_video.mp4')
+if __name__ == "__main__":
+    input_video = input("Select video that need watermark: ")
+    watermark_image = "watermark.png"
+    output_video = f"{input_video}_watermark.mp4"
+
+    add_moving_watermark(f'{input_video}.mp4', watermark_image, output_video)
