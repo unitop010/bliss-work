@@ -18,19 +18,32 @@ def add_moving_watermark(video_path, watermark_path, output_path):
     watermark = mp.ImageClip(temp_watermark_path).set_duration(clip.duration)
     watermark_width, watermark_height = watermark.size
 
+    # Initial movement direction (45 degrees)
+    speed = 50  # pixels per second
+    velocity_x, velocity_y = speed, speed
+
     # Function to calculate the new position
     def position_func(t):
-        speed = 100  # pixels per second
-        x = speed * t
-        y = speed * t
+        nonlocal velocity_x, velocity_y
         
-        # Handle collisions with the boundaries
-        if x + watermark_width > video_width:
-            x = video_width - watermark_width
-        if y + watermark_height > video_height:
-            y = video_height - watermark_height
+        # Calculate new positions based on time and speed
+        new_x = (velocity_x * t) % (2 * (video_width - watermark_width))
+        new_y = (velocity_y * t) % (2 * (video_height - watermark_height))
 
-        return (x, y)
+        # Reverse direction if needed
+        if new_x > (video_width - watermark_width):
+            new_x = 2 * (video_width - watermark_width) - new_x
+            velocity_x = -speed
+        else:
+            velocity_x = speed
+
+        if new_y > (video_height - watermark_height):
+            new_y = 2 * (video_height - watermark_height) - new_y
+            velocity_y = -speed
+        else:
+            velocity_y = speed
+
+        return (new_x, new_y)
     
     # Set the dynamic position for the watermark
     watermark = watermark.set_pos(position_func)
@@ -43,4 +56,4 @@ def add_moving_watermark(video_path, watermark_path, output_path):
     
 
 # Example usage
-add_moving_watermark('1389.mp4', 'watermark.png', 'output_video.mp4')
+add_moving_watermark('input_video.mp4', 'watermark.png', 'output_video.mp4')
