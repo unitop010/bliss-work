@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from fake_useragent import UserAgent
 import json
+
+ua = UserAgent()
 
 payload = {"customer-action":"pagination"}
 
@@ -64,9 +67,14 @@ headers = {
   "Sec-Fetch-Site": "none",
   "Sec-Fetch-User": "?1",
   "Upgrade-Insecure-Requests": "1",
-  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  # "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+  "User-Agent": str(ua.random),
   "Viewport-Width": "1920"
 }
+
+# headers = {
+#   "User-Agent": str(ua.random)
+# }
 
 response = requests.get("https://www.amazon.com/s?k=laptop+replacement+screens&i=computers&rh=n%3A3011391011%2Cn%3A2612045011&dc&page=400&crid=1AX23ZA34FITZ&qid=1719558793&refresh=1&rnid=2941120011&sprefix=replacement+screens%2Caps%2C141&ref=sr_pg_3", headers=headers)
 
