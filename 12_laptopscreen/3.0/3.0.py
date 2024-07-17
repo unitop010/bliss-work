@@ -54,7 +54,7 @@ def scrape_page(page_index, page_soup):
             if product_spec_text.startswith('Compatibility:'):
               item_comp = product_spec_text.replace('Compatibility:', '').replace('SERIES', '').strip() + ' '
             elif product_spec_text.startswith('Size:'):
-              item_size = product_spec_text.replace('Size:', '').split('WideScreen')[0].strip() + ' '
+              item_size = product_spec_text.replace('Size:', '').split('"')[0].strip() + '" '
             elif product_spec_text.startswith('Resolution:'):
               item_resol = product_spec_text.replace('Resolution:', '').strip() + ' '
             elif product_spec_text.startswith('Video Connector:'):
