@@ -69,7 +69,7 @@ def main(url):
     for hsn_href in hsn_hrefs:
       main(hsn_href)
 
-base_url = 'https://www.volza.com/p/lcd-panel-for-laptop/import/#/'
+base_url = 'https://www.volza.com/p/laptop-screens/import/hsn-code-85285910/'
 main(base_url)
 print('-' * 5 + 'Scraping Finished' + '-' * 5)
 driver.quit()
