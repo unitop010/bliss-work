@@ -6,11 +6,11 @@ import requests, csv, math, random, os
 
 item_num = 0
 process_log = []
-directory = f'{datetime.now().strftime("%m_%d_%Y")}_WEEKLY'
+directory = f'{datetime.now().strftime("%m-%d-%Y")}_WEEKLY'
 primary_directory = f'output_{directory}'
 
-if not os.path.exists(directory):
-  os.makedirs(directory)
+# if not os.path.exists(directory):
+#   os.makedirs(directory)
 
 if not os.path.exists(primary_directory):
   os.makedirs(primary_directory)
@@ -113,16 +113,20 @@ def data_process():
   # Remove duplications
   df_unique = merged_df.drop_duplicates(subset=['Title'])
   print("\n***** All duplications removed *****")
+
+  # Save csv file
+  df_unique.to_csv(f'{primary_directory}/#ebay_Jonas_{directory}.csv', index=False, encoding='utf-8-sig')
+  print(f'\n***** CSV files saved in {primary_directory} *****\n')
   
   # Split the DataFrame into smaller DataFrames with 10000 rows each
-  dfs = [df_unique[i:i+10000] for i in range(0, len(df_unique), 10000)]
-  for i, smaller_df in enumerate(dfs):
-    smaller_df.to_csv(f'{directory}/#ebay_Jonas_{directory}_{i + 1}.csv', index=False, encoding='utf-8-sig')
-  print(f'\n***** CSV files saved in {directory} *****\n')
+  # dfs = [df_unique[i:i+10000] for i in range(0, len(df_unique), 10000)]
+  # for i, smaller_df in enumerate(dfs):
+  #   smaller_df.to_csv(f'{directory}/#ebay_Jonas_{directory}_{i + 1}.csv', index=False, encoding='utf-8-sig')
+  # print(f'\n***** CSV files saved in {directory} *****\n')
 
 for url_index, url in enumerate(all_urls):
   id_index = url_index + 1
-  response = requests.get(url[0])
+  response = requests.get(f'{url[0]}&_udlo=25')
   soup = BeautifulSoup(response.content, 'html.parser')
   # html_content = str(soup.prettify)
   # with open("webpage.html", "w", encoding="utf-8") as file:
@@ -133,7 +137,7 @@ for url_index, url in enumerate(all_urls):
     continue
   if product_num > 10000:
     product_seg = math.floor(product_num/10000)
-    price_low = 0
+    price_low = 25
     price_high = 50
     price_interval = 5
     while True:
@@ -154,7 +158,7 @@ for url_index, url in enumerate(all_urls):
         break
       sleep(random.uniform(1, 2))
   else:
-    scrape_id(url[1], url[0], id_index, product_num)
+    scrape_id(url[1], f'{url[0]}&_udlo=25', id_index, product_num)
 urls.close()
 print('\n***** Scraping finished *****')
 data_process()
