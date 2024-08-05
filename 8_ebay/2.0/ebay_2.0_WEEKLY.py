@@ -115,14 +115,14 @@ def data_process():
   print("\n***** All duplications removed *****")
 
   # Save csv file
-  df_unique.to_csv(f'{primary_directory}/#ebay_Jonas_{directory}.csv', index=False, encoding='utf-8-sig')
-  print(f'\n***** CSV files saved in {primary_directory} *****\n')
+  # df_unique.to_csv(f'{primary_directory}/#ebay_Jonas_{directory}.csv', index=False, encoding='utf-8-sig')
+  # print(f'\n***** CSV files saved in {primary_directory} *****\n')
   
-  # Split the DataFrame into smaller DataFrames with 10000 rows each
-  # dfs = [df_unique[i:i+10000] for i in range(0, len(df_unique), 10000)]
-  # for i, smaller_df in enumerate(dfs):
-  #   smaller_df.to_csv(f'{directory}/#ebay_Jonas_{directory}_{i + 1}.csv', index=False, encoding='utf-8-sig')
-  # print(f'\n***** CSV files saved in {directory} *****\n')
+  # Split the DataFrame into smaller DataFrames with 50000 rows each
+  dfs = [df_unique[i:i+50000] for i in range(0, len(df_unique), 50000)]
+  for i, smaller_df in enumerate(dfs):
+    smaller_df.to_csv(f'{primary_directory}/#ebay_Jonas_{directory}_{i + 1}.csv', index=False, encoding='utf-8-sig')
+  print(f'\n***** CSV files saved in {directory} *****\n')
 
 for url_index, url in enumerate(all_urls):
   id_index = url_index + 1
