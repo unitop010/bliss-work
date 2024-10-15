@@ -9,9 +9,6 @@ process_log = []
 directory = f'{datetime.now().strftime("%m-%d-%Y")}_DAILY'
 primary_directory = f'output_{directory}'
 
-# if not os.path.exists(directory):
-#   os.makedirs(directory)
-
 if not os.path.exists(primary_directory):
   os.makedirs(primary_directory)
 
