@@ -24,7 +24,7 @@ for page_item in page_items:
 
   print(output)
 
-  open_out = open('output_cc.csv','a',newline="", encoding='utf-8')
+  open_out = open('output_cc-20240919.csv','a',newline="", encoding='utf-8')
   file_o_csv = csv.writer(open_out, delimiter=',')
   file_o_csv.writerow(output)
   open_out.close()
